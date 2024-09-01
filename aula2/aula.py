@@ -1,5 +1,5 @@
 
-import pygame
+import keyboard
 
 import sys
 
@@ -13,7 +13,7 @@ class Automovel:
         self.cor = cor
         self.velocidade = 0  # Inicializa a velocidade como zero
         self.sentido = None
-        self.marcha = 1
+        self.marcha = 0
         
     def acelerar(self):
         if self.sentido == True:
@@ -29,7 +29,7 @@ class Automovel:
             print(f"O automóvel {self.marca} {self.modelo} freou. Velocidade atual: {self.velocidade} km/h")
         elif self.sentido == False:
             self.velocidade -= 1
-            print(f"O automóvel {self.marca} {self.modelo} acelerou. Velocidade atual: {self.velocidade} km/h")
+            print(f"O automóvel {self.marca} {self.modelo} freou. Velocidade atual: {self.velocidade} km/h")
         else:
             print("O automóvel já está parado.")
     def parar(self):
@@ -43,38 +43,72 @@ class Automovel:
             print(f"O {self.marca} está parado")
             
     def mudar_marcha(self):
-        str(input("Digite a marcha que o carro está: ")).upper
-        if self.marcha in ('1', '2', '3', '4', '5'):
-            self.sentido == True
-        elif self.marcha == "R":
-            self.velocidade = 0
-            self.sentido == False
-            
-pygame.init()
+        while True:
+            self.marcha = str(input("Digite a marcha que o carro está: ")).upper()
+            if self.marcha == "R":
+                if self.sentido == True:
+                    self.velocidade = 0
+                self.sentido = False
+                break
+            elif int(self.marcha) in [1, 2, 3, 4, 5]:
+                self.sentido = True
+                break
+            else:
+                print("Marcha inválida!")
+    def aumentar_marcha(self):
+        
+        if int(self.marcha) <=5:
+            int(self.marcha) += 1
+# pygame.init()
 
-screen = pygame.display.set_mode((640, 480))
-pygame.display.set_caption("Controle do Carro")
+# screen = pygame.display.set_mode((640, 480))
+# pygame.display.set_caption("Controle do Carro")
 
-# Cria um objeto da classe Automovel
-carro1 = Automovel("Toyota", "Corolla", 2000, 4, "Prata")
+# # Cria um objeto da classe Automovel
+# carro1 = Automovel("Toyota", "Corolla", 2000, 4, "Prata")
 
-while True:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            pygame.quit()
-            sys.exit()
-        elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_RIGHT:
-                carro1.acelerar()
-                
-    screen.fill((0, 0, 0))  # Limpa a tela com a cor preta
-    pygame.display.flip()  
-
-
-# Exemplo de inicialização de objetos e uso dos métodos
 carro1 = Automovel("Toyota", "Corolla", 2000, 4, "Prata")
 carro2 = Automovel("Honda", "Civic", 1800, 4, "Preto")
 
+
+
+while True:
+    carro1.mudar_marcha()
+    while True:
+        if keyboard.is_pressed('up'):
+            carro1.aumentar_marcha()
+            print(f"Você subiu para a {carro1.marcha}º marcha")
+            break
+        if keyboard.is_pressed('down'):
+            print("Down arrow pressed")
+            break
+        elif keyboard.is_pressed('left'):
+            carro1.frear()
+            break
+        elif keyboard.is_pressed('right'):
+            carro1.acelerar()
+            break
+        elif keyboard.is_pressed('p'):
+            carro1.parar()
+            break
+        elif keyboard.is_pressed('q'):
+            break
+    break
+
+# while True:
+#     for event in pygame.event.get():
+#         if event.type == pygame.QUIT:
+#             pygame.quit()
+#             sys.exit()
+#         elif event.type == pygame.KEYDOWN:
+#             if event.key == pygame.K_RIGHT:
+#                 carro1.acelerar()
+                
+#     screen.fill((0, 0, 0))  # Limpa a tela com a cor preta
+#     pygame.display.flip()  
+
+
+# Exemplo de inicialização de objetos e uso dos métodos
 
 
 carro1.mudar_marcha()
