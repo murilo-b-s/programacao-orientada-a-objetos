@@ -82,15 +82,18 @@ carro2 = Automovel("Honda", "Civic", 1800, 4, "Preto")
 while True:
     carro1.mudar_marcha()
     while True:
-        keyboard.is_pressed('')
-        while True:
-            if keyboard.is_pressed('up'):
+        if keyboard.is_pressed('up'):
+            if not up_pressed:  # Executa apenas se ainda não foi processado
                 carro1.aumentar_marcha()
                 print(f"Você subiu para a {carro1.marcha}º marcha")
-                break
+                up_pressed = True
+        else:
+            up_pressed = False
+
         if keyboard.is_pressed('down'):
             print("Down arrow pressed")
-            
+            keyboard.wait('down', suppress=True)
+
         if keyboard.is_pressed('left'):
             carro1.frear()
             
@@ -102,7 +105,7 @@ while True:
             
         if keyboard.is_pressed('q'):
             break
-    break
+    
 
 # while True:
 #     for event in pygame.event.get():
