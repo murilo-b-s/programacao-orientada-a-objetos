@@ -44,21 +44,28 @@ class Automovel:
             
     def mudar_marcha(self):
         while True:
-            self.marcha = str(input("Digite a marcha que o carro está: ")).upper()
+            # try:
+            self.marcha = input("Digite a marcha que o carro está: ").upper()
+            # except:
+                # self.marcha = (input("Digite a marcha que o carro está: ").upper())
             if self.marcha == "R":
                 if self.sentido == True:
                     self.velocidade = 0
                 self.sentido = False
+                self.marcha = 6
                 break
-            elif int(self.marcha) in [1, 2, 3, 4, 5]:
+            if int(self.marcha) in [1, 2, 3, 4, 5]:
+                self.marcha = int(self.marcha)
                 self.sentido = True
                 break
             else:
                 print("Marcha inválida!")
     def aumentar_marcha(self):
         
-        if int(self.marcha) <=5:
-            int(self.marcha) += 1
+        if self.marcha == 6:
+            self.marcha = 1
+        elif int(self.marcha) < 5:
+            self.marcha += 1
 # pygame.init()
 
 # screen = pygame.display.set_mode((640, 480))
@@ -75,23 +82,25 @@ carro2 = Automovel("Honda", "Civic", 1800, 4, "Preto")
 while True:
     carro1.mudar_marcha()
     while True:
-        if keyboard.is_pressed('up'):
-            carro1.aumentar_marcha()
-            print(f"Você subiu para a {carro1.marcha}º marcha")
-            break
+        keyboard.is_pressed('')
+        while True:
+            if keyboard.is_pressed('up'):
+                carro1.aumentar_marcha()
+                print(f"Você subiu para a {carro1.marcha}º marcha")
+                break
         if keyboard.is_pressed('down'):
             print("Down arrow pressed")
-            break
-        elif keyboard.is_pressed('left'):
+            
+        if keyboard.is_pressed('left'):
             carro1.frear()
-            break
-        elif keyboard.is_pressed('right'):
+            
+        if keyboard.is_pressed('right'):
             carro1.acelerar()
-            break
-        elif keyboard.is_pressed('p'):
+            
+        if keyboard.is_pressed('p'):
             carro1.parar()
-            break
-        elif keyboard.is_pressed('q'):
+            
+        if keyboard.is_pressed('q'):
             break
     break
 
@@ -111,13 +120,6 @@ while True:
 # Exemplo de inicialização de objetos e uso dos métodos
 
 
-carro1.mudar_marcha()
-carro1.acelerar()
-carro1.situacao()
-
-carro1.frear()
-carro1.situacao()
-    
     
 # carro1.acelerar()
 # carro1.acelerar()
