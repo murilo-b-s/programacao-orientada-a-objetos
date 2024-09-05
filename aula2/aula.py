@@ -95,10 +95,18 @@ while True:
             keyboard.wait('down', suppress=True)
 
         if keyboard.is_pressed('left'):
-            carro1.frear()
+            if not up_pressed:  # Executa apenas se ainda não foi processado
+                carro1.frear()
+                up_pressed = True
+        else:
+            up_pressed = False
             
         if keyboard.is_pressed('right'):
-            carro1.acelerar()
+            if not up_pressed:  # Executa apenas se ainda não foi processado
+                carro1.frear()
+                up_pressed = True
+        else:
+            up_pressed = False
             
         if keyboard.is_pressed('p'):
             carro1.parar()
