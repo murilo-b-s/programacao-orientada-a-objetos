@@ -19,6 +19,11 @@ class Carro:
         
         else:
             print(f"SEM PROPRIETÁRIO")
+
+    def mostrarInfoSemProp(self):
+        print(f"Marca: {self.marca}")
+        print(f"Modelo: {self.modelo}")
+        print(f"Ano: {self.ano}\n")
         
 class Proprietario:
     def __init__(self, nome, idade):
@@ -32,11 +37,33 @@ class Proprietario:
 
     def mostrarInformacoes(self):
         print(f'Nome: {self.nome}')
-        print(f'idade: {self.idade}')
-        print(f'\nCarros:')
-        for carro in self.carros:
-            carro.mostrarInformacoes()
+        print(f'Idade: {self.idade}')
+        if self.carros == []:
+            print(f"{self.nome} não possui nenhum carro")
+        
+        else:
+            print(f'\nCarros:')
+            for carro in self.carros:
+                carro.mostrarInfoSemProp()
 
+    def __str__(self):
+        return f'Nome: {self.nome}, Idade: {self.idade}'
+
+
+def criar_proprietario():
+    nomePessoa = input("Digite o nome do proprietário: ").capitalize()
+    idadePessoa = input("Digite a idade do proprietário: ")
+    pessoa = Proprietario(nomePessoa, idadePessoa)
+    proprietarios.append(pessoa)
+    pessoa.mostrarInformacoes()
+    return pessoa
+
+def criar_carro():
+    marca = input("Digitite a marca do carro: ")
+    modelo = input("Digitite o modelo do carro: ")
+    ano = input("Digitite o ano do carro: ")
+    carro = Carro(marca, modelo, ano)
+    return carro
 
 proprietarios = []
 carros = []
@@ -44,18 +71,28 @@ carros = []
 while True:
     print(f'''{"="*20}
             1 = Criar proprietário
+            2 = Criar carro
         {"="*20}''')
     escolha = input()
+
     if escolha == '1':
-        nomePessoa = input("Digite o nome do proprietário: ").capitalize()
-        idadePessoa = input("Digite a idade do proprietário: ")
-        pessoa = Proprietario(nomePessoa, idadePessoa)
-        proprietarios.append(pessoa.nome)
-        print(proprietarios)
-        adicionar_carro = input(f"Gostaria de adicionar um carro à lista de {pessoa.nome}? ")
+        pessoa = criar_proprietario()
+        while True:
+            adicionar_carro = input(f"Gostaria de adicionar um carro à lista de {pessoa.nome}? S/N ").upper()
+            if adicionar_carro == "S":
+                carro = criar_carro(pessoa)
+                carros.append(carro)
+                pessoa.addCarro(carro)
+                pessoa.mostrarInformacoes()
+                break
+            if adicionar_carro == "N":
+                break
+            else:
+                print("\nNão foi digitado S ou N\n")
+                pass
 
     if escolha == '2':
-
+        criar_carro()
         pass
 
     if escolha == '0':
