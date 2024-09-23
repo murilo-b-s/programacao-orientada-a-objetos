@@ -55,3 +55,6 @@ dataValidade = int(input("Digite a validade da CNH do motorista: "))
 motorista = Motorista(nome, idade, CNH, dataValidade)
 
 motorista.dirigir(caminhao)
+
+# 
+# hhhhhghhhghg
