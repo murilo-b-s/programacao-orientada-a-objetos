@@ -16,6 +16,7 @@ class Caminhao:
                 print("Essa carga não pode ser carregada neste caminhão")
             else:
                 print("Carga carregada com sucesso!")
+                break
 
     def descarregar(self, peso):
         while True:
@@ -84,7 +85,7 @@ idade = int(input("Digite a sua idade: "))
 cnh = int(input("Diite a sua cnh: "))
 dataValidade = input("Digite a validade da cnh dd/mm/aaaa:  ")
 
-motorista = Motorista(nome, idade, cnh)
+motorista = Motorista(nome, idade, cnh, dataValidade)
 
 
 caminhao.carregar(peso)
