@@ -47,9 +47,7 @@ class Produto:
 
 
 produto = Produto(12, "camiseta", "vestuário", 19.90, 7)
-
-produto.getCodigo()
-produto.getNome()
+print(f"Código: {produto.getCodigo()}")
 produto.getCategoria()
 produto.getPreco()
 produto.getQuantidadeEstoque()
