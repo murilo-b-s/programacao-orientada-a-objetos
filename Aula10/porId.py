@@ -39,22 +39,6 @@ def update_Usuario(name, new_senha, new_e_mail, new_age):
     else:
         print(f'Usuário {name} não encontrado.')
 
-def update_Usuario_Id(id):
-    usuario = session.query(Usuario).filter_by(id=id).first()
-    if usuario:
-        new_name = input('Nome:')
-        new_senha = input('Senha:')
-        new_e_mail = input('E-mail:')
-        new_age = int(input("Nova idade: "))
-        usuario.name = new_name
-        usuario.age = new_age
-        usuario.senha=new_senha
-        usuario.e_mail=new_e_mail
-        session.commit()
-        print(f'Usuário {id} atualizado para a idade {new_age}.')
-    else:
-        print(f'Usuário {id} não encontrado.')
-
 
 # Função para deletar um usuário
 def delete_Usuario(name):
@@ -65,16 +49,6 @@ def delete_Usuario(name):
         print(f'Usuário {name} deletado com sucesso.')
     else:
         print(f'Usuário {name} não encontrado.')
-
-def delete_Usuario_Id(id):
-    usuario = session.query(Usuario).filter_by(id=id).first()
-    user_name= usuario.name
-    if usuario:
-        session.delete(usuario)
-        session.commit()
-        print(f'Usuário {id} {user_name} deletado com sucesso.')
-    else:
-        print(f'Usuário {id} não encontrado.')
 
 
 # Função para listar todos os usuários
@@ -95,9 +69,7 @@ def main():
         print("2. Atualizar usuário")
         print("3. Deletar usuário")
         print("4. Listar usuários")
-        print("5. Atualizar por id")
-        print("6. Deletar por id")
-        print("7. Sair")
+        print("5. Sair")
 
         choice = input("Opção: ")
 
@@ -121,14 +93,6 @@ def main():
         elif choice == '4':
             list_Usuarios()
         elif choice == '5':
-            list_Usuarios()
-            id= int(input('ID do usuario para atualizar:'))
-            update_Usuario_Id(id)
-        elif choice == '6':
-            list_Usuarios()
-            id = int(input("ID do usuário a ser deletado: "))
-            delete_Usuario_Id(id)
-        elif choice == '7':
             print("Saindo...")
             break
         else:
