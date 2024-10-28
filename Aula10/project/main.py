@@ -103,3 +103,4 @@ if __name__ == "__main__":
     Base.metadata.create_all(engine)  # Cria a tabela se não existir
     main()
     session.close()
+    
