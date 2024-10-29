@@ -109,7 +109,7 @@ def main():
             insert_Usuario(name, senha, e_mail, age )
         elif choice == '2':
             list_Usuarios()
-            name = input("Nome do usuário a ser atualizado: ")
+            id = input("Nome do usuário a ser atualizado: ")
             new_senha = input('Senha:')
             new_e_mail = input('E-mail:')
             new_age = int(input("Nova idade: "))
