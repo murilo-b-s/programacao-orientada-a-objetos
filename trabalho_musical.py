@@ -55,6 +55,20 @@ def login():
         print(f'Usuário ou senha incorreto. Tente novamente.')
         return False
 
+def cadastro_produto():
+    categoria = input('Categoria: ')
+    cor = input('Cor: ')
+    estoque = int(input('Quantidade no estoque: '))
+    valor = float(input('Valor: '))
 
-cadastrar_usuario()
-login()
+    peça = session.query(Produtos).filter_by(categoria = categoria, cor = cor).first()
+    if peça:
+        print('Já existe peças identicas a essa no estoque. Se quiser atualizar escolha outra opção.')
+    
+    new_produto = Produtos(categoria = categoria, cor = cor, estoque = estoque, valor = valor)
+    session.add(new_produto)
+    session.commit()
+    print(f'O produto {categoria} de cor {cor} foi adicionado com sucesso!')
+
+
+cadastro_produto()
